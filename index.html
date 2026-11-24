@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#132238">
+  <meta name="description" content="Monya Auto Spares inventory and sales management">
+  <title>Monya Auto Spares</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-mark">MA</div>
+    <div class="brand">
+      <strong>MONYA AUTO SPARES</strong>
+      <span>Inventory &amp; Sales Management</span>
+    </div>
+    <span class="status" id="connectionStatus">Checking connection…</span>
+  </header>
+
+  <main class="shell">
+    <section class="welcome">
+      <div>
+        <p class="eyebrow">SHOP MANAGEMENT</p>
+        <h1>Business overview</h1>
+        <p class="muted">Your shop's inventory and sales workspace.</p>
+      </div>
+      <div class="date" id="todayLabel"></div>
+    </section>
+
+    <section class="notice" id="setupNotice">
+      <strong>Phase 1 preview</strong>
+      <p>This is the application foundation and interface preview. Cloud login and shared live records become active after the Supabase project is configured using the setup guide.</p>
+    </section>
+
+    <section class="metrics" aria-label="Business summary">
+      <article class="metric"><span>Total spare parts</span><strong id="partCount">—</strong><small>Inventory items</small></article>
+      <article class="metric"><span>Today's sales</span><strong id="salesTotal">KSh 0.00</strong><small>Recorded sales value</small></article>
+      <article class="metric"><span>Today's gross profit</span><strong id="profitTotal">KSh 0.00</strong><small>Based on cost at sale</small></article>
+      <article class="metric"><span>Low-stock items</span><strong id="lowStock">—</strong><small>Requires attention</small></article>
+    </section>
+
+    <section class="panel">
+      <div class="panel-heading">
+        <div><p class="eyebrow">WORKSPACE</p><h2>Phase 1 modules</h2></div>
+        <span class="tag">Single shop · KES</span>
+      </div>
+      <div class="module-grid">
+        <article class="module"><div class="module-icon">▦</div><h3>Inventory</h3><p>Spare part catalogue, prices, opening stock and balances.</p><span class="module-state">Planned · Phase 2</span></article>
+        <article class="module"><div class="module-icon">↗</div><h3>Record a sale</h3><p>Employee sales entry with stock validation and transaction history.</p><span class="module-state">Planned · Phase 3</span></article>
+        <article class="module"><div class="module-icon">▤</div><h3>Excel import/export</h3><p>Upload stock lists and download inventory or sales reports.</p><span class="module-state">Planned · Phase 2</span></article>
+        <article class="module"><div class="module-icon">◷</div><h3>Daily reports</h3><p>Daily sales, cost of goods sold and gross profit summaries.</p><span class="module-state">Planned · Phase 4</span></article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-heading">
+        <div><p class="eyebrow">SECURITY MODEL</p><h2>Access roles</h2></div>
+      </div>
+      <div class="role-list">
+        <div><span class="role-dot owner"></span><div><strong>Owner / Administrator</strong><p>Manage inventory, prices, employees, imports, reports and corrections.</p></div></div>
+        <div><span class="role-dot employee"></span><div><strong>Employee</strong><p>Record sales and view permitted stock information. Cannot edit protected inventory fields.</p></div></div>
+      </div>
+    </section>
+
+    <footer>© <span id="year"></span> Monya Auto Spares · Secure business workspace</footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
