@@ -1,0 +1,10 @@
+{
+  "name": "Monya Auto Spares",
+  "short_name": "Monya Spares",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f3f6fa",
+  "theme_color": "#132238",
+  "description": "Inventory and sales management for Monya Auto Spares",
+  "icons": []
+}
