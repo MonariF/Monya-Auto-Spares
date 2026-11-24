@@ -1,42 +1,56 @@
-# Monya Auto Spares Management System
+# Monya Auto Spares — Phase 1 Foundation
 
-A mobile-first spare parts shop management system for Monya Auto Spares.
+A mobile-first Progressive Web App (PWA) shell for the Monya Auto Spares shop-management project.
 
-## Agreed project requirements
+## Confirmed requirements
 
 - **Currency:** Kenyan Shillings (KES)
 - **Shop locations:** One shop
-- **Employee access:** Individual employee access
-- **Offline operation:** Required
-- **Profit reporting:** Daily profit reporting
-- **Core shop operations:** Inventory, sales and purchases
+- **Employee access:** Individual employee accounts
+- **Offline operation:** The app shell can be cached for repeat/offline opening. Offline sales queues and conflict-safe synchronisation are later implementation work.
+- **Daily reporting:** Daily sales and gross-profit reporting are planned.
+- **Access roles:** Owner/administrator and employee, with protected inventory fields reserved for the owner.
 
-The application is intended to support day-to-day spare parts shop operations, with reliable record keeping and a workflow suitable for use on a mobile phone.
+## Files in this repository
 
-## Development status
+- `index.html` — dashboard and Phase 1 interface
+- `styles.css` — responsive mobile-first styling
+- `app.js` — date, currency display, connection indicator and service-worker registration
+- `manifest.webmanifest` — PWA metadata
+- `service-worker.js` — caches the application shell for repeat/offline opening
+- `.gitignore` — excludes common local secrets, databases, backups and generated files
 
-This repository is the source-control home for the project. The initial commit records the agreed requirements. Application source files and the database implementation have **not yet been added**.
+## Preview locally
 
-## Planned implementation areas
+Service workers require localhost or HTTPS. From the project folder, run:
 
-1. Product and inventory records
-2. Purchase and stock-in records
-3. Sales and stock-out records
-4. Individual employee access and activity records
-5. Offline data capture and synchronisation design
-6. Daily profit and transaction reports
-7. Data backup, validation and recovery procedures
+```bash
+python -m http.server 8000
+```
 
-## Important implementation principles
+Then open `http://localhost:8000`.
 
-- Preserve existing shop records when adding or changing features.
-- Do not expose database passwords, API keys, employee credentials or other secrets in this public repository.
-- Test stock and financial calculations before using the system for live shop transactions.
-- Make the offline workflow explicit about which records are saved locally and which have synchronised to the central database.
+## Current implementation boundary
 
-## Technology and deployment
+This is a **Phase 1 interface foundation**, not a live multi-user inventory system. The dashboard figures are placeholders. The current frontend does not yet provide live database connectivity, login, stock editing, sales recording, Excel import/export, daily closing or offline sales synchronisation.
 
-The final database, hosting and synchronisation configuration will be documented after the implementation choices are confirmed. Do not place live credentials in source files. Use environment variables or the hosting platform's secret-management settings.
+The README supplied with the project describes a planned Supabase schema at `supabase/schema.sql`, but that SQL file was **not included in the uploaded source files** and is not present in this repository yet. Do not run a database setup step until the actual schema file has been added and reviewed.
+
+## Planned database and production work
+
+1. Add and review the Supabase PostgreSQL schema, indexes and row-level security policies.
+2. Configure Supabase authentication and securely assign owner and individual employee roles.
+3. Connect the frontend using only the Supabase project URL and publishable/anon key. Never put the `service_role` key in browser code.
+4. Implement a transactional database function (RPC) that atomically validates stock, records sales and sale lines, deducts stock, snapshots buying/selling prices and records an audit event.
+5. Implement offline sales with unique client-generated transaction IDs and conflict reconciliation to prevent duplicate posting or overselling.
+6. Add inventory import/export, daily sales and gross-profit reporting, backups, monitoring and automated tests.
+7. Test row-level security with separate owner and employee accounts, then deploy only over HTTPS.
+
+## Security notes
+
+- Do not commit Supabase secrets, service-role keys, passwords, employee credentials or private shop data.
+- Use hosting-platform secret settings or environment variables for private configuration.
+- Test all stock and financial calculations before enabling live transactions.
 
 ## Project owner
 
